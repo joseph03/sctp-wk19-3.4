@@ -29,6 +29,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      # describe-repositories returns error if tehre is no intended ECR found
+      # || is a logical OR operator used to chain commands together. 
+      # It executes the second command only if the first command fails (i.e., returns a non-zero exit status).
       - name: Ensure ECR Repository exists
         run: |
              aws ecr describe-repositories --repository-names $ECR_REPOSITORY --region $AWS_REGION || \
